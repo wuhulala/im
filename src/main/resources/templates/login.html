@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>登录页面</title>
+</head>
+<body>
+<div th:if="${param.error}">
+    无账号密码
+</div>
+<div th:if="${param.logout}">
+    你已注销
+</div>
+<form th:action="@{/login}" th:method="post">
+    <div><label>账号 : </label><input type="text" name="username"/></div>
+    <div><label>密码 : </label><input type="password" name="password"/></div>
+    <div><input type="submit" value="登陆"/></div>
+</form>
+</body>
+</html>
