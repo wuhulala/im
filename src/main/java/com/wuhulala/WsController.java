@@ -45,7 +45,7 @@ public class WsController {
     public void say() throws InterruptedException, JsonProcessingException {
         List userLists = listLoggedInUsers();
         System.out.println("5秒刷新当前登陆的用户 : [ " + userLists + " ]");
-        messagingTemplate.convertAndSend("/topic/users", new ObjectMapper().writeValueAsString(userLists));
+        //messagingTemplate.convertAndSend("/topic/users", new ObjectMapper().writeValueAsString(userLists));
     }
 
     @MessageMapping("/chat")

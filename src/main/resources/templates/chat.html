@@ -107,9 +107,9 @@
 
     var socket = new SockJS("/endpointChat");
     var stomp = Stomp.over(socket);
-    stomp.connect('guest', 'guest', function (frame) {
+    stomp.connect(currentUser, 'guest', function (frame) {
         console.log("Connected: " + frame);
-        stomp.subscribe("/user/queue/notifications", function (response) {
+        stomp.subscribe("/user/" + currentUser +"/queue/notifications", function (response) {
             var data = JSON.parse(response.body);
             if(isTab(data.sender)){
                 $("#output"+getCurrentLinkman()).append("<p>"+data.date+"</p><b>" + data.text + "</b><br/>");
@@ -117,7 +117,11 @@
                 addTab(data.sender);
                 $("#output"+getCurrentLinkman()).append("<p>"+data.date+"</p><b>" + data.text + "</b><br/>");
             }
+
+        },function () {
+            
         });
+        
         stomp.subscribe("/topic/users", function (data) {
             data = JSON.parse(data.body);
             addUser(data);
